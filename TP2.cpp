@@ -54,19 +54,21 @@ void Ecriture_PGM(vector<vector<int>> table){//lit un tableau, remplit le pgm
 vector<vector<int>> agrandit(vector<vector<int>> pgm){
 
 	vector<vector<int>> pgmgrand;
-	int n = pgm.size();// taile du fichier de base à doubler
+	int width, height;
+    width = pgm[0].size();
+    height = pgm.size();// taile du fichier de base à doubler
 
 	//remplit la nouvelle matrice de vector de taille 2n
-	vector<int> ligne(n*2) ;
-	for(int i=0;i<2*n;i++)
+	vector<int> ligne(width*2) ;
+	for(int i=0;i<2*height;i++)
 	{
 		pgmgrand.push_back(ligne);
 	}
 
 
-	for(int i=0;i<n;i++)
+	for(int i=0;i<height;i++)
 	{
-		for(int j=0;j<n;j++)
+		for(int j=0;j<width;j++)
 		{
 		pgmgrand[2*i][2*j]=pgm[i][j];
 		pgmgrand[2*i+1][2*j]=pgm[i][j];
@@ -80,16 +82,11 @@ return pgmgrand;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	vector<vector<int>> b;
-	vector<int> c;
-	c.push_back(1);
-	b.push_back(c);
+	vector<vector<int>> table;
+	table = Lecture_PGM();
+	table = agrandit(table);
+	Ecriture_PGM(table);
 
-	b[0][0]=2;
-	b = agrandit(b);
-	int a;
-	std::cout<<"helloworld";
-	std::cin>>a;
 	return 0;
 }
 
