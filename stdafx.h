@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <vector>
-
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <ctime>
+#include "image.h"
 
 // TODO: faites référence ici aux en-têtes supplémentaires nécessaires au programme

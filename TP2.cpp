@@ -1,19 +1,21 @@
 // TP2.cpp : définit le point d'entrée pour l'application console.
 //
-
+//#include "image.h"
 #include "stdafx.h"
-#include <iostream>
+/*#include <iostream>
 #include <string>
 #include <fstream>
 #include <ctime>
+#include "image.h"
+#include <vector>*/
 using namespace std;
 
 
-vector<vector<int>> Lecture_PGM(){//lit un pgm, remplit le tableau
+vector<vector<int>> Lecture_PGM(string str){//lit un pgm, remplit le tableau
 	
    string line;
-   int val;
-   fstream myfile_PGM("lena.pgm");
+   //int val;
+   fstream myfile_PGM(str);
    getline(myfile_PGM, line);
    getline(myfile_PGM, line);
    vector<vector<int>> table;
@@ -83,10 +85,16 @@ return pgmgrand;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	vector<vector<int>> table;
-	table = Lecture_PGM();
-	table = agrandit(table);
+	vector<vector<int>> table2;
+	table = Lecture_PGM("lena.pgm");
+	//table = agrandit(table);
+	
+	table = seuillage(50, table);
 	Ecriture_PGM(table);
-
+	//table2 = Lecture_PGM("vide.pgm");
+	/*table2 = dif(table, table2);
+	table2 = dif(table2, table);
+	Ecriture_PGM(table2);*/
 	return 0;
 }
 

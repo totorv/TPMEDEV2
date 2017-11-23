@@ -1,6 +1,7 @@
 #pragma once
+#include "stdafx.h"
+using namespace std;
 
+vector<vector<int>> dif(vector<vector<int>>, vector<vector<int>>);
 
-int dif(Vector<int> Mat1, Vector<int> Mat2);
-
-void seuillage(int seuil, Vector<int> Mat);
+vector<vector<int>> seuillage(int, vector<vector<int>>);
