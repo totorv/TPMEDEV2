@@ -46,6 +46,8 @@ void Ecriture_PGM(){//lit un txt, remplit le pgm
 
 }
 
+void aggrandit(){
+}
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int a;
