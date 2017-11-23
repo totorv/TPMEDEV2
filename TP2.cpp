@@ -8,41 +8,44 @@
 #include <ctime>
 using namespace std;
 
-void Lecture_PGM(){//lit un pgm, remplit le txt
-
+vector<vector<int>> Lecture_PGM(){//lit un pgm, remplit le tableau
+	
    string line;
+   int val;
    fstream myfile_PGM("lena.pgm");
-   fstream myfile_txt("lena.txt");
-   cout << "0" << endl;
-   if (myfile_PGM){
-	   cout << "1" << endl;
-       while (getline(myfile_PGM, line)){
-		 cout << "2" << endl;
-         myfile_txt << line << endl;;
-       }
+   getline(myfile_PGM, line);
+   getline(myfile_PGM, line);
+   vector<vector<int>> table;
+   int width, height, poubelle;
+   myfile_PGM >> width >> height >> poubelle;
+   for (int i = 0; i<height; i++){
+	   table.push_back(vector<int>(width));
+	   for(int j = 0; j<width; j++){
+		   myfile_PGM >> table[i][j];
+	   }
    }
-
    myfile_PGM.close();
-   myfile_txt.close();
-
+   return table;
 }
 
-void Ecriture_PGM(){//lit un txt, remplit le pgm
+void Ecriture_PGM(vector<vector<int>> table){//lit un tableau, remplit le pgm
 
    string line;
-   fstream myfile_PGM("lena.pgm");
-   fstream myfile_txt("lena.txt");
-
-   if (myfile_txt.is_open()){
-       while (myfile_txt.good()){
-         getline(myfile_txt, line);
-         myfile_PGM << line << endl;;
-       }
+   fstream myfile_PGM("vide.pgm");
+   myfile_PGM << "P2" << endl << "#" << endl;
+   int width, height;
+   width = table[0].size();
+   height = table.size();
+   myfile_PGM << width << " " << height << endl << 255 << endl;
+   for (int i = 0; i<height; i++){
+	   for(int j = 0; j<width; j++){
+		   myfile_PGM << table[i][j] << " ";
+	   }
+	   myfile_PGM << endl;
    }
 
-   myfile_PGM.close();
-   myfile_txt.close();
 
+   myfile_PGM.close();
 }
 
 int _tmain(int argc, _TCHAR* argv[])
