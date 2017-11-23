@@ -8,6 +8,9 @@
 #include <ctime>
 using namespace std;
 
+
+	
+
 void Lecture_PGM(){//lit un pgm, remplit le txt
 
    string line;
@@ -46,10 +49,39 @@ void Ecriture_PGM(){//lit un txt, remplit le pgm
 
 }
 
-void aggrandit(){
+vector<vector<int>> agrandit(vector<vector<int>> pgm){
+	vector<vector<int>> pgmgrand;
+	int taille = pgm.size();
+	vector<int> ligne(taille*2) ;
+
+	for(int i=0;i<2*taille;i++)
+	{
+		pgmgrand.push_back(ligne);
+	}
+
+	for(int i=0;i<taille;i++)
+	{
+		for(int j=0;j<taille;j++)
+		{
+		pgmgrand[2*i][2*j]=pgm[i][j];
+		pgmgrand[2*i+1][2*j]=pgm[i][j];
+		pgmgrand[2*i][2*j+1]=pgm[i][j];
+		pgmgrand[2*i+1][2*j+1]=pgm[i][j];
+	}
 }
+return pgmgrand;
+}
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
+	vector<vector<int>> b;
+	vector<int> c;
+	c.push_back(1);
+	b.push_back(c);
+
+	b[0][0]=2;
+	b = agrandit(b);
 	int a;
 	std::cout<<"helloworld";
 	std::cin>>a;
