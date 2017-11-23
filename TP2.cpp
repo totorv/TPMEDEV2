@@ -8,16 +8,9 @@
 #include <ctime>
 using namespace std;
 
-<<<<<<< HEAD
+
 vector<vector<int>> Lecture_PGM(){//lit un pgm, remplit le tableau
 	
-=======
-
-	
-
-void Lecture_PGM(){//lit un pgm, remplit le txt
-
->>>>>>> 00a8189c2b71882db1024b241aa9d2aa36ee16da
    string line;
    int val;
    fstream myfile_PGM("lena.pgm");
@@ -79,8 +72,8 @@ vector<vector<int>> agrandit(vector<vector<int>> pgm){
 		pgmgrand[2*i+1][2*j]=pgm[i][j];
 		pgmgrand[2*i][2*j+1]=pgm[i][j];
 		pgmgrand[2*i+1][2*j+1]=pgm[i][j];
+		}
 	}
-}
 return pgmgrand;
 }
 
