@@ -49,19 +49,24 @@ void Ecriture_PGM(){//lit un txt, remplit le pgm
 
 }
 
-vector<vector<int>> agrandit(vector<vector<int>> pgm){
-	vector<vector<int>> pgmgrand;
-	int taille = pgm.size();
-	vector<int> ligne(taille*2) ;
+// cette fonction double la taille de l'image en recopiant les valeurs 4 fois
 
-	for(int i=0;i<2*taille;i++)
+vector<vector<int>> agrandit(vector<vector<int>> pgm){
+
+	vector<vector<int>> pgmgrand;
+	int n = pgm.size();// taile du fichier de base à doubler
+
+	//remplit la nouvelle matrice de vector de taille 2n
+	vector<int> ligne(n*2) ;
+	for(int i=0;i<2*n;i++)
 	{
 		pgmgrand.push_back(ligne);
 	}
 
-	for(int i=0;i<taille;i++)
+
+	for(int i=0;i<n;i++)
 	{
-		for(int j=0;j<taille;j++)
+		for(int j=0;j<n;j++)
 		{
 		pgmgrand[2*i][2*j]=pgm[i][j];
 		pgmgrand[2*i+1][2*j]=pgm[i][j];
