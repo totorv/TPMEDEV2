@@ -14,11 +14,10 @@ void Lecture_PGM(){//lit un pgm, remplit le txt
    fstream myfile_PGM("lena.pgm");
    fstream myfile_txt("lena.txt");
    cout << "0" << endl;
-   if (myfile_PGM.is_open()){
+   if (myfile_PGM){
 	   cout << "1" << endl;
-       while (myfile_PGM.good()){
+       while (getline(myfile_PGM, line)){
 		 cout << "2" << endl;
-         getline(myfile_PGM, line);
          myfile_txt << line << endl;;
        }
    }
