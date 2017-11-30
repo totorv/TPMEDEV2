@@ -1,6 +1,7 @@
 // TP2.cpp : définit le point d'entrée pour l'application console.
 //
 
+
 #include "stdafx.h"
 #include <iostream>
 #include <string>
@@ -9,44 +10,44 @@
 using namespace std;
 
 
+vector<vector<int>> Lecture_PGM(string filename){//lit un pgm, remplit le tableau
 	
-
-void Lecture_PGM(){//lit un pgm, remplit le txt
-
    string line;
-   fstream myfile_PGM("lena.pgm");
-   fstream myfile_txt("lena.txt");
-   cout << "0" << endl;
-   if (myfile_PGM.is_open()){
-	   cout << "1" << endl;
-       while (myfile_PGM.good()){
-		 cout << "2" << endl;
-         getline(myfile_PGM, line);
-         myfile_txt << line << endl;;
-       }
+   int val;
+   fstream myfile_PGM(filename);
+   getline(myfile_PGM, line);
+   getline(myfile_PGM, line);
+   vector<vector<int>> table;
+   int width, height, poubelle;
+   myfile_PGM >> width >> height >> poubelle;
+   for (int i = 0; i<height; i++){
+	   table.push_back(vector<int>(width));
+	   for(int j = 0; j<width; j++){
+		   myfile_PGM >> table[i][j];
+	   }
    }
-
    myfile_PGM.close();
-   myfile_txt.close();
-
+   return table;
 }
 
-void Ecriture_PGM(){//lit un txt, remplit le pgm
+void Ecriture_PGM(vector<vector<int>> table){//lit un tableau, remplit le pgm
 
    string line;
-   fstream myfile_PGM("lena.pgm");
-   fstream myfile_txt("lena.txt");
-
-   if (myfile_txt.is_open()){
-       while (myfile_txt.good()){
-         getline(myfile_txt, line);
-         myfile_PGM << line << endl;;
-       }
+   fstream myfile_PGM("vide.pgm");
+   myfile_PGM << "P2" << endl << "#" << endl;
+   int width, height;
+   width = table[0].size();
+   height = table.size();
+   myfile_PGM << width << " " << height << endl << 255 << endl;
+   for (int i = 0; i<height; i++){
+	   for(int j = 0; j<width; j++){
+		   myfile_PGM << table[i][j] << " ";
+	   }
+	   myfile_PGM << endl;
    }
 
-   myfile_PGM.close();
-   myfile_txt.close();
 
+   myfile_PGM.close();
 }
 
 // cette fonction double la taille de l'image en recopiant les valeurs 4 fois
@@ -54,42 +55,65 @@ void Ecriture_PGM(){//lit un txt, remplit le pgm
 vector<vector<int>> agrandit(vector<vector<int>> pgm){
 
 	vector<vector<int>> pgmgrand;
-	int n = pgm.size();// taile du fichier de base à doubler
+	int width, height;
+    width = pgm[0].size();
+    height = pgm.size();// taile du fichier de base à doubler
 
 	//remplit la nouvelle matrice de vector de taille 2n
-	vector<int> ligne(n*2) ;
-	for(int i=0;i<2*n;i++)
+	vector<int> ligne(width*2) ;
+	for(int i=0;i<2*height;i++)
 	{
 		pgmgrand.push_back(ligne);
 	}
 
 
-	for(int i=0;i<n;i++)
+	for(int i=0;i<height;i++)
 	{
-		for(int j=0;j<n;j++)
+		for(int j=0;j<width;j++)
 		{
 		pgmgrand[2*i][2*j]=pgm[i][j];
 		pgmgrand[2*i+1][2*j]=pgm[i][j];
 		pgmgrand[2*i][2*j+1]=pgm[i][j];
 		pgmgrand[2*i+1][2*j+1]=pgm[i][j];
+		} 
 	}
-}
 return pgmgrand;
+}
+
+vector<vector<int>> reduit(vector<vector<int>> pgm){
+
+	vector<vector<int>> pgmpetit;
+	int width, height;
+    width = pgm[0].size();
+    height = pgm.size();// taile du fichier de base à doubler
+
+	//remplit la nouvelle matrice de vector de taille 2n
+	vector<int> ligne(width/2) ;
+	for(int i=0;i<height/2;i++)
+	{
+		pgmpetit.push_back(ligne);
+	}
+
+	int somme = 0;
+	for(int i=0;i<height/2;i++)
+	{
+		for(int j=0;j<width/2;j++)
+		{
+			somme += pgm[2*i][2*j] +pgm[2*i+1][2*j] +pgm[2*i][2*j+1] +pgm[2*i+1][2*j+1];
+			pgmpetit[i][j]=somme/4;
+		}
+	}
+return pgmpetit;
 }
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	vector<vector<int>> b;
-	vector<int> c;
-	c.push_back(1);
-	b.push_back(c);
+	vector<vector<int>> table;
+	table = Lecture_PGM("lena.pmg");
+	table = agrandit(table);
+	Ecriture_PGM(table);
 
-	b[0][0]=2;
-	b = agrandit(b);
-	int a;
-	std::cout<<"helloworld";
-	std::cin>>a;
 	return 0;
 }
 
