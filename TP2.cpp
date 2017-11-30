@@ -1,20 +1,34 @@
 // TP2.cpp : définit le point d'entrée pour l'application console.
 //
+<<<<<<< HEAD
 
 
+=======
+//#include "image.h"
+>>>>>>> bf755c5e8662a7ceba8e8110283e2141f089c6c1
 #include "stdafx.h"
-#include <iostream>
+/*#include <iostream>
 #include <string>
 #include <fstream>
 #include <ctime>
+#include "image.h"
+#include <vector>*/
 using namespace std;
 
 
+<<<<<<< HEAD
 vector<vector<int>> Lecture_PGM(string filename){//lit un pgm, remplit le tableau
 	
    string line;
    int val;
    fstream myfile_PGM(filename);
+=======
+vector<vector<int>> Lecture_PGM(string str){//lit un pgm, remplit le tableau
+	
+   string line;
+   //int val;
+   fstream myfile_PGM(str);
+>>>>>>> bf755c5e8662a7ceba8e8110283e2141f089c6c1
    getline(myfile_PGM, line);
    getline(myfile_PGM, line);
    vector<vector<int>> table;
@@ -75,7 +89,11 @@ vector<vector<int>> agrandit(vector<vector<int>> pgm){
 		pgmgrand[2*i+1][2*j]=pgm[i][j];
 		pgmgrand[2*i][2*j+1]=pgm[i][j];
 		pgmgrand[2*i+1][2*j+1]=pgm[i][j];
+<<<<<<< HEAD
 		} 
+=======
+		}
+>>>>>>> bf755c5e8662a7ceba8e8110283e2141f089c6c1
 	}
 return pgmgrand;
 }
@@ -110,10 +128,23 @@ return pgmpetit;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	vector<vector<int>> table;
+<<<<<<< HEAD
 	table = Lecture_PGM("lena.pmg");
 	table = agrandit(table);
 	Ecriture_PGM(table);
 
+=======
+	vector<vector<int>> table2;
+	table = Lecture_PGM("lena.pgm");
+	//table = agrandit(table);
+	
+	table = seuillage(50, table);
+	Ecriture_PGM(table);
+	//table2 = Lecture_PGM("vide.pgm");
+	/*table2 = dif(table, table2);
+	table2 = dif(table2, table);
+	Ecriture_PGM(table2);*/
+>>>>>>> bf755c5e8662a7ceba8e8110283e2141f089c6c1
 	return 0;
 }
 
